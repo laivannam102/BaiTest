@@ -1,0 +1,58 @@
+I.  1.Dependency Injection (DI) là một mẫu thiết kế trong lập trình, đặc biệt phổ biến trong các ứng dụng .NET, nhằm mục đích quản lý sự phụ thuộc giữa các đối tượng một cách hiệu quả.
+	Mẫu thiết kế này cho phép bạn tách biệt giữa việc tạo ra các đối tượng và việc sử dụng chúng, giúp mã nguồn trở nên linh hoạt hơn, dễ dàng kiểm thử và bảo trì.
+	Sự phụ thuộc (Dependency): Khi một lớp (class) cần một đối tượng từ lớp khác để hoạt động, đối tượng đó được gọi là sự phụ thuộc của lớp đó.
+	Injection: Là hành động cung cấp các phụ thuộc này cho một đối tượng, thay vì để nó tự tạo ra hoặc quản lý các phụ thuộc của mình.
+	Các module phụ thuộc (dependency) sẽ được inject vào module cấp cao thay vì các module cấp cao phải trực tiếp tạo mới các phụ thuộc.
+
+	2. Các frame work hỗ trợ trực tiếp DI trong .net core là : Microsoft.Extensions.DependencyInjection và Unity.
+		Ngoài ra còn 1 số framework khác cũng hô trợ trực tiếp DI.
+	
+	3. Cách dùng 
+	- Import thư viện Microsoft.Extensions.DependencyInjection trong class Startup của project.
+	- Tiếp theo, định nghĩa các dịch vụ mà bạn muốn sử dụng. Ví dụ, bạn có thể định nghĩa một dịch vụ đơn giản như sau:
+		public interface IProduct
+		{
+			string GetMessage();
+		}
+
+		public class Product : IProduct
+		{
+			public string GetProductName()
+			{
+				return "Product Name";
+			}
+		}
+	- Mở lớp Program.cs và đăng ký dịch vụ trong phương thức ConfigureServices:
+		var builder = WebApplication.CreateBuilder(args);
+		builder.Services.AddTransient<IProduct, IProduct>();
+
+		var app = builder.Build();
+	- Bạn có thể sử dụng dịch vụ đã đăng ký trong Controller bằng cách tiêm phụ thuộc qua constructor như sau:
+	
+		[ApiController]
+		[Route("[controller]")]
+		public class ProductController : ControllerBase
+		{
+			private readonly IProduct _product;
+
+			public MyController(IProduct product)
+			{
+				_product = product;
+			}
+
+			[HttpGet]
+			public IActionResult Get()
+			{
+				string productName = _product.GetProductName();
+				return Ok(message);
+			}
+		}
+
+		
+II. Làm thế nào để tối ưu tốc độ truy vấn khi lưu trữ dữ liệu sự kiện hàng ngày trong SQL với 10 triệu bản ghi mỗi ngày? 
+	- Những cách để tối ưu tốc độ truy vấn khi lưu trữ dữ liệu sự kiện hàng ngày trong SQL với 10 triệu bản ghi mỗi ngày là :
+		+ Sử dụng các kiểu dữ liệu phù hợp để tiết kiệm dung lượng lưu trữ và tăng tốc độ truy vấn. Ví dụ, sử dụng INT cho các số nguyên thay vì BIGINT nếu không cần thiết.
+		+ Sử dụng chỉ mục (indexes) để tăng tốc độ truy vấn. Nên tạo các chỉ mục trên các cột thường xuyên được sử dụng trong các câu lệnh where, join và order by.
+		+  Sử dụng stored procedures thay vì truy vấn động có thể giúp tối ưu hóa hiệu suất bằng cách giảm độ phức tạp của truy vấn và giúp SQL Server tạo ra các kế hoạch thực thi tối ưu hơn.
+		+ Xem xét việc sử dụng caching để lưu trữ các kết quả truy vấn thường xuyên được yêu cầu.
+
