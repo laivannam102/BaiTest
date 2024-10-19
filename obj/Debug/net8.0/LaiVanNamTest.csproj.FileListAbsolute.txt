@@ -28,3 +28,4 @@ D:\LaiVanNamTest\obj\Debug\net8.0\refint\LaiVanNamTest.dll
 D:\LaiVanNamTest\obj\Debug\net8.0\LaiVanNamTest.pdb
 D:\LaiVanNamTest\obj\Debug\net8.0\LaiVanNamTest.genruntimeconfig.cache
 D:\LaiVanNamTest\obj\Debug\net8.0\ref\LaiVanNamTest.dll
+D:\LaiVanNamTest\obj\Debug\net8.0\LaiVanNamTest.sourcelink.json

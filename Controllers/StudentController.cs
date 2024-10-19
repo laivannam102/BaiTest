@@ -14,11 +14,29 @@ namespace LaiVanNamTest.Controllers
         public List<Student> GetAll()
         {
             // Tạo 1 mảng chứa danh sách học sinh ngẫu nhiên
+            Student[] students = RandomListStudent();
+
+            // Sắp xếp mảng học sinh theo điểm trung bình và tên
+            BubbleSortStudent(students);
+
+            return students.ToList();
+        }
+        [HttpGet("GetStudent")]
+        public object GetStudentByAvg()          
+        {
+            Student[] students = RandomListStudent();
+            var student = BinarySearchStudentWithAverage(students, 8.0);
+
+            return student != null ? student : "Không tìm thấy học sinh có điểm trung bình bằng 8";
+        }
+
+        private Student[] RandomListStudent()
+        {
             int numberOfStudents = 10;
             Student[] students = new Student[numberOfStudents];
 
             Random random = new Random();
-            
+
             for (int i = 0; i < numberOfStudents; i++)
             {
                 students[i] = new Student
@@ -32,11 +50,7 @@ namespace LaiVanNamTest.Controllers
                     }
                 };
             }
-
-            // Sắp xếp mảng học sinh theo điểm trung bình và tên
-            BubbleSortStudent(students);
-
-            return students.ToList();
+            return students;
         }
 
         private static void BubbleSortStudent(Student[] students)
@@ -65,6 +79,34 @@ namespace LaiVanNamTest.Controllers
             Student temp = a;
             a = b;
             b = temp;
+        }
+
+        // Tìm kiếm học sinh có điểm trung bình bằng 8 bằng phương pháp nhị phân
+
+        private static Student? BinarySearchStudentWithAverage(Student[] students, double targetAverage)
+        {
+            int left = 0;
+            int right = students.Length - 1;
+
+            while (left <= right)
+            {
+                int mid = left + (right - left) / 2;
+                double avgScore = students[mid].GetAverageScore();
+
+                if (Math.Abs(avgScore - targetAverage) < 0.001) // Nếu tìm thấy điểm trung bình bằng targetAverage
+                {
+                    return students[mid];
+                }
+                else if (avgScore < targetAverage) // Nếu điểm trung bình của mid nhỏ hơn targetAverage
+                {
+                    right = mid - 1; // Tìm trong nửa bên trái
+                }
+                else
+                {
+                    left = mid + 1; // Tìm trong nửa bên phải
+                }
+            }
+            return null; // Nếu không tìm thấy
         }
     }
 }

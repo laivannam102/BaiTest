@@ -18,5 +18,15 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "LaiVanNamTest.Controllers.StudentController",
+    "Method": "GetStudentByAvg",
+    "RelativePath": "api/Student/GetStudent",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   }
 ]

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LaiVanNamTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+415566507f97cd02f5f76b19036a2d0c59ed5f3d")]
 [assembly: System.Reflection.AssemblyProductAttribute("LaiVanNamTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LaiVanNamTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
